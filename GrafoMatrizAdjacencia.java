@@ -1,7 +1,6 @@
 package programagrafos;
 
 
-import programagrafos.Vertice;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -69,6 +68,61 @@ public class GrafoMatrizAdjacencia {
             }                 
         }
         return null;
+    }
+    
+    public int buscaIndiceVertice(Vertice vertice){        
+        for(int i=0; i < matriz.length; i++){
+            if (vertices.get(i).getIdentificador().equals(vertice.getIdentificador())){
+                return i;
+            }                 
+        }
+        return -1;
+    }
+    
+    public void inserirAresta(Vertice vi, Vertice vf){
+        int indiceVi, indiceVf;
+        indiceVi = buscaIndiceVertice(vi);
+        indiceVf = buscaIndiceVertice(vf);
+        if (indiceVi != -1){
+            if (indiceVf != -1){
+               matriz[indiceVi][indiceVf] = 1;
+               matriz[indiceVf][indiceVi] = 1;
+               JOptionPane.showMessageDialog(null, "Aresta inserida!");
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "Vértice final não encontrado!");    
+            }
+        }
+        else{
+           JOptionPane.showMessageDialog(null, "Vértice inicial não encontrado!");    
+        }
+    }
+    
+    public void excluirAresta(Vertice vi, Vertice vf){
+        int indiceVi, indiceVf;
+        indiceVi = buscaIndiceVertice(vi);
+        indiceVf = buscaIndiceVertice(vf);
+        if (indiceVi != 0){
+            if (indiceVf != 0){
+               matriz[indiceVi][indiceVf] = 0;
+               matriz[indiceVf][indiceVi] = 0;
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "Vértice final não encontrado!");    
+            }
+        }
+        else{
+           JOptionPane.showMessageDialog(null, "Vértice inicial não encontrado!");    
+        }
+    }
+    
+    public void exibirGrafo(){
+        for(int i=0; i<matriz.length; i++){
+            for(int j=0; j<matriz.length; j++){
+                System.out.print(matriz[i][j]);
+            }
+            System.out.println();
+        }
     }
     
 }
